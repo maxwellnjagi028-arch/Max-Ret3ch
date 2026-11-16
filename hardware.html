@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block title %}Hardware Sales & Repair Lab | MaxReT3ch AI{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between pb-8 border-b border-cyan-500/20 gap-4 mb-10">
+        <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/70 border border-cyan-400/40 text-cyan-300 text-xs font-semibold mb-2">
+                <span>Vertical 03 • Hardware Systems & Bench Lab</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white">
+                High-Performance Compute & Micro-soldering
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-xl">
+                Bespoke liquid-cooled AI workstations, certified Grade-A refurbished enterprise laptops, and component-level board revival.
+            </p>
+        </div>
+        <a href="#repair-section" class="btn-electric text-xs py-2.5 px-5">
+            <i data-lucide="wrench" class="w-4 h-4"></i>
+            <span>Book Bench Repair Ticket</span>
+        </a>
+    </div>
+
+    <!-- Hardware Inventory Grid -->
+    <div class="mb-16">
+        <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                <i data-lucide="server" class="w-5 h-5 text-cyan-400"></i>
+                <span>Certified Hardware & Workstation Inventory</span>
+            </h2>
+            <span class="text-xs text-slate-400">All systems 100% stress-tested in clean-room bench</span>
+        </div>
+
+        <div id="hardware-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Loaded dynamically from API -->
+        </div>
+    </div>
+
+    <!-- Component-Level Repair & Bench Triage Section -->
+    <div id="repair-section" class="glass-panel p-8 border-cyan-500/30">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <div class="lg:col-span-5 space-y-4">
+                <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-semibold">
+                    <span>⚡ Advanced Repair Laboratory</span>
+                </div>
+                <h2 class="text-2xl font-extrabold text-white">Component-Level Micro-soldering & Diagnostics</h2>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Don't throw away a multi-thousand dollar workstation or laptop because of a burnt $4 power MOSFET or shorted capacitor. Our technicians use thermal imaging cameras and current injection to diagnose and repair boards to factory specifications.
+                </p>
+
+                <div class="p-4 rounded-lg bg-black/60 border border-slate-800 space-y-2 text-xs text-slate-300">
+                    <div class="flex items-center gap-2 text-cyan-400 font-semibold">✓ Ted Automated Pre-Triage</div>
+                    <div>When you submit your ticket, Ted conducts instant symptom matching to isolate suspect power rails and components before bench intake.</div>
+                </div>
+
+                <div class="text-xs text-slate-400">
+                    Standard Diagnostic Bench Intake: <strong class="text-cyan-400 font-mono">$129</strong> (Credited toward approved repair).
+                </div>
+            </div>
+
+            <!-- Repair Ticket Booking Form -->
+            <div class="lg:col-span-7 p-6 rounded-xl bg-black/70 border border-cyan-500/30">
+                <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+                    <i data-lucide="file-plus" class="w-4 h-4 text-cyan-400"></i>
+                    <span>Submit Hardware Repair Ticket</span>
+                </h3>
+
+                <form id="repair-ticket-form" class="space-y-4 text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-slate-300 mb-1">Customer / Organization Name *</label>
+                            <input type="text" id="rep-name" required placeholder="e.g. Liam Martinez" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-slate-100 focus:border-cyan-400 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1">Email Address *</label>
+                            <input type="email" id="rep-email" required placeholder="liam@studio.net" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-slate-100 focus:border-cyan-400 outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-slate-300 mb-1">Phone Number</label>
+                            <input type="tel" id="rep-phone" placeholder="+1 (555) 019-2831" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-slate-100 focus:border-cyan-400 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1">Hardware / Device Model *</label>
+                            <input type="text" id="rep-device" required placeholder="e.g. ASUS ProArt X670E, RTX 4090 Workstation" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-slate-100 focus:border-cyan-400 outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-slate-300 mb-1">Primary Issue Category *</label>
+                            <select id="rep-category" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-slate-100 focus:border-cyan-400 outline-none">
+                                <option value="no_power">No Power / Blown Rail / Dead PC</option>
+                                <option value="no_post">Fans Spin, No Display (No POST)</option>
+                                <option value="screen_damage">Screen / Display Panel Damage</option>
+                                <option value="thermal_throttling">Thermal Throttling / AIO Failure</option>
+                                <option value="gpu_artifact">GPU Artifacting / Driver Crash</option>
+                                <option value="liquid_damage">Liquid Spill Recovery</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1">Urgency Priority</label>
+                            <select id="rep-priority" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-slate-100 focus:border-cyan-400 outline-none">
+                                <option value="normal">Normal (3-5 business days)</option>
+                                <option value="high">High (48-hour bench priority)</option>
+                                <option value="critical">Critical Mission Support (24-hour rush)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-300 mb-1">Observed Symptoms & Incident History *</label>
+                        <textarea id="rep-symptoms" required rows="3" placeholder="Describe when the problem started, any smells/sounds, error codes, or prior repairs..." class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-slate-100 focus:border-cyan-400 outline-none"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full btn-electric py-2.5 text-xs font-bold">
+                        Initialize Ticket & Run Ted AI Triage
+                    </button>
+                </form>
+
+                <!-- Ticket Result Notification Box -->
+                <div id="repair-result-box" class="hidden mt-4 p-4 rounded-lg bg-cyan-950/60 border border-cyan-400 text-xs"></div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    async function loadHardware() {
+        const grid = document.getElementById('hardware-grid');
+        if (!grid) return;
+
+        try {
+            const res = await fetch('/api/hardware');
+            const data = await res.json();
+            const list = data.hardware || [];
+
+            grid.innerHTML = list.map(item => {
+                const specsList = Object.entries(item.specs || {}).map(([k, v]) => `
+                    <div class="flex justify-between py-1 border-b border-slate-800/60">
+                        <span class="text-slate-400">${k}:</span>
+                        <span class="text-slate-200 text-right truncate max-w-[60%] font-mono">${v}</span>
+                    </div>
+                `).join('');
+
+                const conditionBadge = item.condition === 'new'
+                    ? '<span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-[10px] font-bold">BRAND NEW</span>'
+                    : '<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold">CERTIFIED REFURBISHED</span>';
+
+                return `
+                    <div class="glass-panel glass-panel-hover p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                ${conditionBadge}
+                                <span class="text-[11px] text-slate-400 font-mono">${item.warranty_months} Mo Warranty</span>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2">${item.name}</h3>
+                            <p class="text-xs text-slate-300 mb-4">${item.description}</p>
+                            
+                            <div class="text-[11px] space-y-1 mb-4 bg-black/40 p-3 rounded-lg border border-slate-800">
+                                ${specsList}
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-slate-400 block line-through">$${item.original_price.toLocaleString()}</span>
+                                <span class="text-xl font-extrabold font-mono text-cyan-400">$${item.price.toLocaleString()}</span>
+                            </div>
+                            <button onclick="Ted.sendMessage('I would like to order or inquire about the ${Ted.escapeHtml(item.name)}')" class="btn-electric text-xs py-1.5 px-3">
+                                Inquire with Ted
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadHardware();
+
+        const repForm = document.getElementById('repair-ticket-form');
+        const resBox = document.getElementById('repair-result-box');
+        if (repForm && resBox) {
+            repForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const payload = {
+                    customer_name: document.getElementById('rep-name').value,
+                    customer_email: document.getElementById('rep-email').value,
+                    customer_phone: document.getElementById('rep-phone').value,
+                    device_model: document.getElementById('rep-device').value,
+                    issue_type: document.getElementById('rep-category').value,
+                    priority: document.getElementById('rep-priority').value,
+                    symptoms: document.getElementById('rep-symptoms').value
+                };
+
+                try {
+                    const res = await fetch('/api/tickets', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        resBox.classList.remove('hidden');
+                        resBox.innerHTML = `
+                            <div class="font-bold text-cyan-300 text-sm mb-1">✓ Repair Ticket ${data.ticket_code} Created</div>
+                            <div class="text-slate-200 mb-2">${Ted.formatMarkdown(data.diagnosis_by_ted)}</div>
+                            <div class="text-slate-400 text-[11px]">Bring device to 742 Cyber Plaza or dispatch via courier. Track progress in the Client Portal.</div>
+                        `;
+                        App.showToast(`Ticket ${data.ticket_code} registered!`, 'success');
+                    }
+                } catch (err) {
+                    App.showToast("Failed to book ticket", "error");
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

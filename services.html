@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+
+{% block title %}Enterprise Technology Services | MaxReT3ch AI{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/70 border border-cyan-400/40 text-cyan-300 text-xs font-semibold">
+            <span>Engineering Architecture & Solutions</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Six Technological Pillars. One Closed-Loop Ecosystem.
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300">
+            From cognitive AI models to physical micro-soldering labs and zero-landfill e-waste processing. Every project is scoped by Ted and signed off by our engineering executives.
+        </p>
+    </div>
+
+    <!-- Vertical 1: AI Solutions -->
+    <div id="ai_solutions" class="glass-panel p-8 mb-12 border-cyan-500/30">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-8 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 text-xs font-mono font-bold border border-cyan-500/40">VERTICAL 01</span>
+                    <span class="text-xs text-slate-400">Autonomous Ecosystems & Vision</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Artificial Intelligence Solutions</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    We architect private, enterprise-grade multi-agent clusters that execute business processes autonomously. Whether you require an on-premise air-gapped LLM that satisfies strict HIPAA/GDPR constraints, a sub-10ms edge computer vision quality control pipeline, or a vector RAG knowledge vault, our team designs custom models that integrate directly into your workflow.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300 pt-2">
+                    <div class="p-3 rounded bg-black/40 border border-slate-800">
+                        <strong class="text-cyan-400 block mb-1">Autonomous Task Agents</strong>
+                        Goal-directed agents equipped with API tool calling and human verification hooks.
+                    </div>
+                    <div class="p-3 rounded bg-black/40 border border-slate-800">
+                        <strong class="text-cyan-400 block mb-1">Zero-Leakage Private RAG</strong>
+                        Local vector indexing of proprietary documents without cloud API exposure.
+                    </div>
+                    <div class="p-3 rounded bg-black/40 border border-slate-800">
+                        <strong class="text-cyan-400 block mb-1">Edge Computer Vision</strong>
+                        Jetson/TensorRT optimized visual defect detection and anomaly scoring.
+                    </div>
+                    <div class="p-3 rounded bg-black/40 border border-slate-800">
+                        <strong class="text-cyan-400 block mb-1">Fine-Tuned Specialized LLMs</strong>
+                        Quantized Llama, Mistral & Gemini models customized on company SOPs.
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-4 p-6 rounded-xl bg-black/60 border border-cyan-500/30 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs text-slate-400 block">Baseline Deployment</span>
+                    <span class="text-3xl font-extrabold font-mono text-cyan-400">$2,499</span>
+                    <span class="text-xs text-slate-500 block mt-1">Typical turnaround: 21 business days</span>
+                </div>
+                <div class="my-6 space-y-2 text-xs text-slate-300">
+                    <div>✓ Custom Agent Architecture</div>
+                    <div>✓ 90 Days SLA Hypercare Support</div>
+                    <div>✓ Full Source Code Ownership</div>
+                </div>
+                <button onclick="requestVerticalQuote('ai_solutions', 'Enterprise AI Agent Cluster')" class="w-full btn-electric text-xs py-2.5">
+                    Generate AI Scope with Ted
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vertical 2: Website & Software Development -->
+    <div id="software_dev" class="glass-panel p-8 mb-12 border-cyan-500/30">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-8 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 text-xs font-mono font-bold border border-cyan-500/40">VERTICAL 02</span>
+                    <span class="text-xs text-slate-400">High-Concurrency Platforms</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Website & Software Development</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    We build mission-critical web applications, enterprise SaaS platforms, and high-throughput microservices. Combining futuristic cybernetic aesthetics with hardened security architectures (RBAC, OWASP Top 10 defenses, automated CI/CD), our platforms deliver sub-second page loads and seamless multi-device responsiveness.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300 pt-2">
+                    <div class="p-3 rounded bg-black/40 border border-slate-800">
+                        <strong class="text-cyan-400 block mb-1">Full-Stack SaaS Architecture</strong>
+                        Scalable PostgreSQL/SQLite backends with FastAPI, Node.js or Python microservices.
+                    </div>
+                    <div class="p-3 rounded bg-black/40 border border-slate-800">
+                        <strong class="text-cyan-400 block mb-1">Real-Time Telemetry & Dashboards</strong>
+                        WebSocket data pipelines streaming live sensor, sales, and analytics metrics.
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-4 p-6 rounded-xl bg-black/60 border border-cyan-500/30 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs text-slate-400 block">Baseline Package</span>
+                    <span class="text-3xl font-extrabold font-mono text-cyan-400">$1,850</span>
+                    <span class="text-xs text-slate-500 block mt-1">Typical turnaround: 28 business days</span>
+                </div>
+                <div class="my-6 space-y-2 text-xs text-slate-300">
+                    <div>✓ Cybernetic Responsive Design</div>
+                    <div>✓ Automated Database Backups</div>
+                    <div>✓ Stripe & API Integrations</div>
+                </div>
+                <button onclick="requestVerticalQuote('software_dev', 'Full-Stack Web Platform')" class="w-full btn-electric text-xs py-2.5">
+                    Generate Web Scope with Ted
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vertical 3: Computer Hardware & Refurbishment -->
+    <div id="hardware_service" class="glass-panel p-8 mb-12 border-cyan-500/30">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-8 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 text-xs font-mono font-bold border border-cyan-500/40">VERTICAL 03</span>
+                    <span class="text-xs text-slate-400">Extreme Compute & Micro-soldering</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Computer Hardware, Sales & Component Repair</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    We build high-performance liquid-cooled AI compute workstations, sell certified Grade-A refurbished enterprise laptops and servers with up to 36 months warranty, and operate an advanced clean-room micro-soldering laboratory capable of reviving damaged motherboards, power rails, and GPU VRMs.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300 pt-2">
+                    <div class="p-3 rounded bg-black/40 border border-slate-800">
+                        <strong class="text-cyan-400 block mb-1">MaxReT3ch AI Workstations</strong>
+                        Dual/Quad GPU compute topology with 72-hour thermal stress verification.
+                    </div>
+                    <div class="p-3 rounded bg-black/40 border border-slate-800">
+                        <strong class="text-cyan-400 block mb-1">Component-Level Lab Triage</strong>
+                        Multimeter impedance mapping, thermal camera fault isolation, and SMD replacement.
+                    </div>
+                </div>
+            </div>
+            <div class="lg:col-span-4 p-6 rounded-xl bg-black/60 border border-cyan-500/30 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs text-slate-400 block">Hardware Catalog</span>
+                    <span class="text-2xl font-extrabold font-mono text-cyan-400">Certified Stock</span>
+                    <span class="text-xs text-slate-500 block mt-1">Workstations from $2,199 • Laptops from $1,299</span>
+                </div>
+                <div class="my-6 space-y-2 text-xs text-slate-300">
+                    <div>✓ 100% Bench Burn-in Certified</div>
+                    <div>✓ Zero-Cosmetic-Blemish Grade-A</div>
+                    <div>✓ Component Lab Warranty</div>
+                </div>
+                <a href="/hardware" class="w-full btn-electric text-xs py-2.5 text-center">
+                    Browse Hardware Store & Book Repair
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vertical 4: 24/7 Managed IT Support -->
+    <div id="it_support" class="glass-panel p-8 mb-12 border-cyan-500/30">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-8 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 text-xs font-mono font-bold border border-cyan-500/40">VERTICAL 04</span>
+                    <span class="text-xs text-slate-400">Zero-Trust Infrastructure</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">24/7 IT Technical Support & Managed Services</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    Protect your company against downtime and cyber threats with our round-the-clock IT support. We maintain proactive endpoint telemetry, zero-trust network perimeter defenses, automated immutable cloud backups, and guarantee a 15-minute emergency response SLA.
+                </p>
+            </div>
+            <div class="lg:col-span-4 p-6 rounded-xl bg-black/60 border border-cyan-500/30 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs text-slate-400 block">Managed Retainer</span>
+                    <span class="text-3xl font-extrabold font-mono text-cyan-400">$499 / mo</span>
+                    <span class="text-xs text-slate-500 block mt-1">Includes up to 15 corporate seats</span>
+                </div>
+                <div class="my-6 space-y-2 text-xs text-slate-300">
+                    <div>✓ Guaranteed 15-Minute SLA</div>
+                    <div>✓ Ransomware-Proof Backups</div>
+                    <div>✓ Ted AI Priority Helpdesk</div>
+                </div>
+                <button onclick="requestVerticalQuote('it_support', '24/7 Managed IT Retainer')" class="w-full btn-electric text-xs py-2.5">
+                    Configure IT Plan with Ted
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vertical 5: Green Tech & E-Waste Recycling -->
+    <div id="green_tech_service" class="glass-panel p-8 mb-12 border-emerald-500/30">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-8 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 text-xs font-mono font-bold border border-emerald-500/40">VERTICAL 05</span>
+                    <span class="text-xs text-slate-400">Circular Economy & ESG Credits</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Green Tech & Electronic Waste Recycling</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    Turn depreciated enterprise laptops, server racks, and GPUs into immediate cash buybacks while preventing toxic heavy metals from entering landfills. Every recycling lot includes DoD 5220.22-M certified cryptographic data sanitization and official ESG Carbon Offset Certificates.
+                </p>
+            </div>
+            <div class="lg:col-span-4 p-6 rounded-xl bg-black/60 border border-emerald-500/30 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs text-slate-400 block">Buyback & Recycling</span>
+                    <span class="text-2xl font-extrabold font-mono text-emerald-400">Cash Payout</span>
+                    <span class="text-xs text-slate-500 block mt-1">Free pickup on 5+ units • ESG Certificates</span>
+                </div>
+                <div class="my-6 space-y-2 text-xs text-slate-300">
+                    <div>✓ DoD & NIST 800-88 Data Wipe</div>
+                    <div>✓ 100% Zero-Landfill Guarantee</div>
+                    <div>✓ Carbon Credit Compliance</div>
+                </div>
+                <a href="/green-tech" class="w-full btn-electric text-xs py-2.5 text-center">
+                    Open Instant E-Waste Calculator
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vertical 6: Technology Education -->
+    <div id="education_service" class="glass-panel p-8 border-cyan-500/30">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-8 space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-400 text-xs font-mono font-bold border border-cyan-500/40">VERTICAL 06</span>
+                    <span class="text-xs text-slate-400">Engineering Masterclasses</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Technology Education & Programming Tutorials</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    Upskill your engineering staff through hands-on masterclasses covering Autonomous AI Agent construction, full-stack real-time telemetry with FastAPI and WebSockets, and component-level board triage, with Ted providing 24/7 code review and feedback.
+                </p>
+            </div>
+            <div class="lg:col-span-4 p-6 rounded-xl bg-black/60 border border-cyan-500/30 flex flex-col justify-between">
+                <div>
+                    <span class="text-xs text-slate-400 block">Curriculum Access</span>
+                    <span class="text-3xl font-extrabold font-mono text-cyan-400">$149</span>
+                    <span class="text-xs text-slate-500 block mt-1">Lifetime updates + Ted AI review</span>
+                </div>
+                <div class="my-6 space-y-2 text-xs text-slate-300">
+                    <div>✓ Interactive Browser Sandbox</div>
+                    <div>✓ 24/7 AI Code Mentor (Ted)</div>
+                    <div>✓ Official MaxReT3ch Certificate</div>
+                </div>
+                <a href="/education" class="w-full btn-electric text-xs py-2.5 text-center">
+                    Explore Tutorial Catalog
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    function requestVerticalQuote(verticalKey, defaultTitle) {
+        const clientName = prompt("Enter your Name or Organization:", "Enterprise Client");
+        if (!clientName) return;
+        const clientEmail = prompt("Enter your Email for the formal proposal:", "inquiries@clientcorp.io");
+        if (!clientEmail) return;
+
+        Ted.sendMessage(`Please generate an itemized commercial proposal for ${clientName} (${clientEmail}). Vertical: ${verticalKey}. Title: ${defaultTitle}.`);
+        App.showToast("Ted is generating your quotation...", "info");
+        setTimeout(() => {
+            window.location.href = '/ted';
+        }, 1200);
+    }
+</script>
+{% endblock %}

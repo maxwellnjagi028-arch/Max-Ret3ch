@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}Technology Education & Programming Tutorials | MaxReT3ch AI{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/70 border border-cyan-400/40 text-cyan-300 text-xs font-semibold">
+            <span>Vertical 06 • Engineering Masterclasses & Mentorship</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Learn from Real Systems. <span class="neon-text">Mentored by Ted 24/7.</span>
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300">
+            Gain production-grade engineering mastery in Autonomous AI Agents, Real-Time Distributed Telemetry, and Hardware Micro-soldering with live code sandboxes.
+        </p>
+    </div>
+
+    <!-- Active Tutorial / Interactive Sandbox Viewer -->
+    <div class="glass-panel p-6 mb-16 border-cyan-500/30">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
+            <div class="flex items-center gap-3">
+                <span id="active-tut-level" class="px-2.5 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-500/40 text-xs font-mono font-bold uppercase">INTERMEDIATE</span>
+                <h2 id="active-tut-title" class="text-lg sm:text-xl font-bold text-white">Building Autonomous AI Agents with Tool Calling in Python</h2>
+            </div>
+            <div class="flex items-center gap-3">
+                <span id="active-tut-duration" class="text-xs text-slate-400 font-mono">45 mins</span>
+                <button onclick="enrollCurrentTutorial()" class="btn-electric text-xs py-1.5 px-3">
+                    Enroll Course
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Lesson Explanation (5 cols) -->
+            <div class="lg:col-span-5 space-y-4 text-xs text-slate-300 leading-relaxed pr-2">
+                <div id="active-tut-desc" class="p-4 rounded-lg bg-black/40 border border-slate-800">
+                    Learn how to construct resilient, task-oriented AI agents equipped with custom execution tools, state persistence, and guardrails.
+                </div>
+                
+                <div class="p-4 rounded-lg bg-cyan-950/30 border border-cyan-500/20 space-y-2">
+                    <span class="text-xs font-bold text-cyan-400 flex items-center gap-1.5">
+                        <i data-lucide="terminal" class="w-4 h-4"></i>
+                        <span>Ted AI Exercise Prompt</span>
+                    </span>
+                    <p id="active-tut-exercise" class="text-slate-200">
+                        Extend the AgentTool class to support an 'approval_required: bool' flag that halts execution until an executive confirms.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Code Sandbox & Execution Output (7 cols) -->
+            <div class="lg:col-span-7 flex flex-col space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-mono text-slate-400">interactive_sandbox.py</span>
+                    <button onclick="runCodeSandbox()" class="btn-electric text-xs py-1.5 px-4 flex items-center gap-1.5">
+                        <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                        <span>Execute Code in Ted AI Sandbox</span>
+                    </button>
+                </div>
+
+                <!-- Code Editor Textarea -->
+                <textarea id="sandbox-code" rows="12" class="w-full bg-[#030712] border border-cyan-500/30 rounded-lg p-4 font-mono text-xs text-cyan-300 focus:border-cyan-400 outline-none leading-relaxed shadow-inner">
+def check_server_status(host: str) -> dict:
+    # Simulated server ping check
+    return {"host": host, "status": "ONLINE", "latency_ms": 14.2}
+
+tools = {
+    "ping": AgentTool("ping", "Checks if server is reachable", check_server_status)
+}
+
+# Ted Agent decision simulator
+print("Agent initialized with 1 active tool.")
+result = tools["ping"].execute(host="nexus.maxret3ch.ai")
+print("Execution Result:", result)
+</textarea>
+
+                <!-- Console Output & Ted Review -->
+                <div class="p-4 rounded-lg bg-black/80 border border-slate-800 text-xs font-mono">
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-800 text-[11px] text-slate-500 mb-2">
+                        <span>CONSOLE TELEMETRY OUTPUT</span>
+                        <span id="output-status" class="text-emerald-400">READY</span>
+                    </div>
+                    <pre id="sandbox-output" class="text-slate-300 whitespace-pre-wrap leading-relaxed max-h-40 overflow-y-auto">Click 'Execute Code in Ted AI Sandbox' to run this script in Ted's simulated runtime environment.</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Course Catalog Grid -->
+    <div class="mb-12">
+        <h3 class="text-xl font-bold text-white mb-6">Complete Engineering Masterclasses</h3>
+        <div id="tutorials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Loaded dynamically from API -->
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    let currentTutorialId = 1;
+
+    async function loadTutorials() {
+        try {
+            const res = await fetch('/api/tutorials');
+            const data = await res.json();
+            const list = data.tutorials || [];
+
+            const grid = document.getElementById('tutorials-grid');
+            if (grid) {
+                grid.innerHTML = list.map(t => `
+                    <div class="glass-panel glass-panel-hover p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-cyan-950 text-cyan-400 border border-cyan-500/30 uppercase">${t.level}</span>
+                                <span class="text-xs text-slate-400 font-mono">${t.duration_minutes} mins</span>
+                            </div>
+                            <h4 class="text-base font-bold text-white mb-2">${t.title}</h4>
+                            <p class="text-xs text-slate-300 mb-4">${t.description}</p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                            <span class="text-[11px] text-slate-400">${t.enrolled_count} students enrolled</span>
+                            <button onclick="selectTutorial(${t.id})" class="btn-outline-electric text-xs py-1 px-3">
+                                Open Sandbox →
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async function selectTutorial(id) {
+        currentTutorialId = id;
+        try {
+            const res = await fetch(`/api/tutorials/${id}`);
+            const data = await res.json();
+            const t = data.tutorial;
+
+            document.getElementById('active-tut-title').textContent = t.title;
+            document.getElementById('active-tut-level').textContent = t.level.toUpperCase();
+            document.getElementById('active-tut-duration').textContent = `${t.duration_minutes} mins`;
+            document.getElementById('active-tut-desc').textContent = t.description;
+            document.getElementById('active-tut-exercise').textContent = t.exercise_prompt;
+            document.getElementById('sandbox-code').value = t.code_example;
+
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async function runCodeSandbox() {
+        const code = document.getElementById('sandbox-code').value;
+        const outBox = document.getElementById('sandbox-output');
+        const stat = document.getElementById('output-status');
+
+        stat.textContent = 'RUNNING INFERENCE...';
+        stat.className = 'text-cyan-400 animate-pulse';
+
+        try {
+            const res = await fetch('/api/tutorials/execute-sandbox', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tutorial_id: currentTutorialId, code: code })
+            });
+            const data = await res.json();
+
+            stat.textContent = 'EXECUTION SUCCESS (0)';
+            stat.className = 'text-emerald-400';
+
+            outBox.innerHTML = `
+${Ted.escapeHtml(data.output)}
+
+----------------------------------------
+[TED AI REVIEWS & LINT VERIFICATION]:
+${data.ted_feedback}
+${data.tips.map(tip => `<span class="text-emerald-300 font-semibold">${tip}</span>`).join('\n')}
+            `.trim();
+
+            App.showToast("Ted AI evaluated code successfully!", "success");
+        } catch (e) {
+            stat.textContent = 'FAILED';
+            stat.className = 'text-rose-400';
+            outBox.textContent = 'Execution error: Could not reach sandbox daemon.';
+        }
+    }
+
+    async function enrollCurrentTutorial() {
+        try {
+            const res = await fetch(`/api/tutorials/${currentTutorialId}/enroll`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_name: App.currentUser ? App.currentUser.full_name : 'Student' })
+            });
+            const data = await res.json();
+            App.showToast(data.message, "success");
+        } catch (e) {
+            App.showToast("Enrollment failed", "error");
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadTutorials();
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,415 @@
+{% extends "base.html" %}
+
+{% block title %}MaxReT3ch AI | Autonomous AI & High-Performance Computing Enterprise{% endblock %}
+
+{% block content %}
+<!-- Futuristic Hero Section -->
+<section class="relative pt-16 pb-24 overflow-hidden border-b border-cyan-500/20">
+    <!-- Ambient Background Glows -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-cyan-600/15 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute top-1/3 left-1/4 w-[400px] h-[250px] bg-blue-700/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Hero Left: Mission & Value Prop -->
+            <div class="lg:col-span-7 space-y-6">
+                <!-- Status Tag -->
+                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-cyan-950/70 border border-cyan-400/40 text-cyan-300 text-xs font-semibold shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                    <span>MaxReT3ch AI • Autonomous Employee System Online</span>
+                </div>
+
+                <!-- Main Headline -->
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                    Where Next-Gen <span class="neon-text">Artificial Intelligence</span> Meets Extreme <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">Computing & Green Tech</span>
+                </h1>
+
+                <!-- Subheadline -->
+                <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
+                    Operated by <strong>Ted</strong>, our autonomous AI employee. We design enterprise AI agents, build high-velocity software, assemble extreme-performance compute rigs, and provide certified zero-landfill e-waste recycling.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <a href="/ted" class="btn-electric text-sm py-3 px-6">
+                        <i data-lucide="bot" class="w-4 h-4"></i>
+                        <span>Consult Ted AI Employee</span>
+                    </a>
+                    <a href="/services" class="btn-outline-electric text-sm py-3 px-6">
+                        <span>Explore 6 Specialties</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                    <a href="/dashboard" class="auth-staff-only hidden text-xs font-semibold text-amber-300 px-4 py-3 rounded-lg border border-amber-500/40 hover:bg-amber-500/10 transition-all flex items-center gap-1.5">
+                        <i data-lucide="shield" class="w-4 h-4"></i>
+                        <span>Executive Approvals</span>
+                    </a>
+                </div>
+
+                <!-- Quick Guarantee Badges -->
+                <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-800/80 text-xs text-slate-400">
+                    <div>
+                        <span class="font-bold text-white block text-sm">DoD 5220.22-M</span>
+                        Certified Data Sanitation
+                    </div>
+                    <div>
+                        <span class="font-bold text-white block text-sm">Zero-Landfill</span>
+                        100% ESG Carbon Credit
+                    </div>
+                    <div>
+                        <span class="font-bold text-white block text-sm">Human Verified</span>
+                        Executive Signed Quotes
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Right: Interactive Ted AI Live Teaser Widget -->
+            <div class="lg:col-span-5">
+                <div class="glass-panel p-6 relative border-cyan-400/40 shadow-[0_0_30px_rgba(0,240,255,0.15)]">
+                    <!-- Widget Header -->
+                    <div class="flex items-center justify-between border-b border-cyan-500/30 pb-3 mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="relative">
+                                <div class="w-10 h-10 rounded-full bg-cyan-950 border-2 border-cyan-400 flex items-center justify-center text-cyan-300 font-bold text-sm shadow-[0_0_12px_rgba(0,240,255,0.5)]">
+                                    TED
+                                </div>
+                                <span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#02040a]"></span>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white">Ted • Digital Employee</h3>
+                                <p class="text-[11px] text-cyan-400 font-mono">Autonomous AI Operations</p>
+                            </div>
+                        </div>
+                        <a href="/ted" class="text-xs text-cyan-400 hover:text-white flex items-center gap-1">
+                            Expand <i data-lucide="maximize-2" class="w-3 h-3"></i>
+                        </a>
+                    </div>
+
+                    <!-- Live Message Thread -->
+                    <div id="hero-ted-thread" class="space-y-3 mb-4 max-h-56 overflow-y-auto text-xs pr-1">
+                        <div class="flex items-start gap-2.5">
+                            <div class="w-6 h-6 rounded-full bg-cyan-950 border border-cyan-400 text-cyan-300 text-[10px] font-bold flex items-center justify-center shrink-0">T</div>
+                            <div class="bg-cyan-950/70 border border-cyan-500/30 p-3 rounded-lg text-slate-200 leading-relaxed">
+                                Greetings! I am <strong>Ted</strong>. How can I assist your business today? Click a prompt below to see me in action:
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Sample Prompts -->
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <button onclick="sendHeroPrompt('I need a quote for an enterprise AI agent cluster with custom RAG.')" class="px-2.5 py-1 rounded bg-slate-800 text-[11px] text-cyan-300 border border-slate-700 hover:border-cyan-400 hover:bg-slate-700 transition-all">
+                            💡 AI Agent Quote
+                        </button>
+                        <button onclick="sendHeroPrompt('My PC won\'t boot and motherboard DRAM light is orange.')" class="px-2.5 py-1 rounded bg-slate-800 text-[11px] text-cyan-300 border border-slate-700 hover:border-cyan-400 hover:bg-slate-700 transition-all">
+                            🔧 Hardware Triage
+                        </button>
+                        <button onclick="sendHeroPrompt('We have 15 enterprise servers to recycle for ESG credit.')" class="px-2.5 py-1 rounded bg-slate-800 text-[11px] text-cyan-300 border border-slate-700 hover:border-cyan-400 hover:bg-slate-700 transition-all">
+                            🌱 E-Waste Trade-In
+                        </button>
+                    </div>
+
+                    <!-- Input form -->
+                    <form id="hero-ted-form" class="flex gap-2">
+                        <input type="text" id="hero-ted-input" placeholder="Ask Ted anything..." class="flex-1 bg-black/70 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-cyan-400 outline-none">
+                        <button type="submit" class="bg-cyan-500 text-black px-3.5 py-2 rounded-lg text-xs font-bold hover:bg-cyan-400 transition-all flex items-center justify-center">
+                            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Live Performance Telemetry Ticker -->
+<section class="py-6 border-b border-cyan-500/20 bg-[#060b18]/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-800/80">
+                <div class="text-2xl sm:text-3xl font-extrabold font-mono text-cyan-400">KSh 185,000,000+</div>
+                <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider font-semibold">Proposals Quoted by Ted</div>
+            </div>
+            <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-800/80">
+                <div class="text-2xl sm:text-3xl font-extrabold font-mono text-emerald-400">1,840+ kg</div>
+                <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider font-semibold">E-Waste CO2 Offset</div>
+            </div>
+            <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-800/80">
+                <div class="text-2xl sm:text-3xl font-extrabold font-mono text-blue-400">99.8%</div>
+                <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider font-semibold">Diagnostic Accuracy</div>
+            </div>
+            <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-800/80">
+                <div class="text-2xl sm:text-3xl font-extrabold font-mono text-amber-400">&lt; 15 Mins</div>
+                <div class="text-xs text-slate-400 mt-1 uppercase tracking-wider font-semibold">Emergency IT Response</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- The 6 Core Business Specialties Showcase -->
+<section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 text-xs font-semibold">
+            <span>Specialized Technical Verticals</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Comprehensive Capabilities Across 6 Core Pillars
+        </h2>
+        <p class="text-sm text-slate-400">
+            From cognitive AI workflows to micro-soldering physical silicon and certified environmental stewardship.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- 1. AI Solutions -->
+        <div class="glass-panel glass-panel-hover p-6 flex flex-col justify-between">
+            <div>
+                <div class="w-12 h-12 rounded-lg bg-cyan-950 border border-cyan-400/40 flex items-center justify-center text-cyan-400 mb-4 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+                    <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                </div>
+                <span class="text-[11px] font-bold text-cyan-400 uppercase tracking-wider">Vertical 01</span>
+                <h3 class="text-xl font-bold text-white mt-1 mb-2">Artificial Intelligence Solutions</h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                    Autonomous multi-agent clusters, private zero-leakage RAG knowledge vaults, fine-tuned on-premise LLMs, and real-time computer vision defect inspection.
+                </p>
+                <div class="space-y-1.5 text-xs text-slate-400 mb-6">
+                    <div class="flex items-center gap-2">✓ Task-Executing Digital Agents</div>
+                    <div class="flex items-center gap-2">✓ Air-gapped On-Premise LLM Models</div>
+                    <div class="flex items-center gap-2">✓ Sub-10ms Computer Vision Pipelines</div>
+                </div>
+            </div>
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                <div>
+                    <span class="text-[10px] text-slate-400 block">Starting from</span>
+                    <span class="text-sm font-bold font-mono text-cyan-400">KSh 320,000</span>
+                </div>
+                <a href="/services#ai_solutions" class="text-xs font-semibold text-cyan-300 hover:text-white flex items-center gap-1">
+                    Configure with Ted →
+                </a>
+            </div>
+        </div>
+
+        <!-- 2. Website & Software Development -->
+        <div class="glass-panel glass-panel-hover p-6 flex flex-col justify-between">
+            <div>
+                <div class="w-12 h-12 rounded-lg bg-cyan-950 border border-cyan-400/40 flex items-center justify-center text-cyan-400 mb-4 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+                    <i data-lucide="code" class="w-6 h-6"></i>
+                </div>
+                <span class="text-[11px] font-bold text-cyan-400 uppercase tracking-wider">Vertical 02</span>
+                <h3 class="text-xl font-bold text-white mt-1 mb-2">Website & Software Development</h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                    High-velocity web portals, SaaS platforms, and enterprise cloud microservices built with modern resilient stacks and cybernetic user experiences.
+                </p>
+                <div class="space-y-1.5 text-xs text-slate-400 mb-6">
+                    <div class="flex items-center gap-2">✓ Full-Stack High-Concurrency Apps</div>
+                    <div class="flex items-center gap-2">✓ Real-time WebSockets & Telemetry</div>
+                    <div class="flex items-center gap-2">✓ Automated CI/CD & Secure Auth</div>
+                </div>
+            </div>
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                <div>
+                    <span class="text-[10px] text-slate-400 block">Starting from</span>
+                    <span class="text-sm font-bold font-mono text-cyan-400">KSh 185,000</span>
+                </div>
+                <a href="/services#software_dev" class="text-xs font-semibold text-cyan-300 hover:text-white flex items-center gap-1">
+                    Scope Project →
+                </a>
+            </div>
+        </div>
+
+        <!-- 3. Computer Hardware Sales, Repair & Refurbishment -->
+        <div class="glass-panel glass-panel-hover p-6 flex flex-col justify-between">
+            <div>
+                <div class="w-12 h-12 rounded-lg bg-cyan-950 border border-cyan-400/40 flex items-center justify-center text-cyan-400 mb-4 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+                    <i data-lucide="cpu" class="w-6 h-6"></i>
+                </div>
+                <span class="text-[11px] font-bold text-cyan-400 uppercase tracking-wider">Vertical 03</span>
+                <h3 class="text-xl font-bold text-white mt-1 mb-2">Hardware Sales & Repair Lab</h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                    Extreme AI workstations, multi-GPU rigs, certified Grade-A refurbished enterprise laptops, and component-level motherboard micro-soldering.
+                </p>
+                <div class="space-y-1.5 text-xs text-slate-400 mb-6">
+                    <div class="flex items-center gap-2">✓ Custom AI Rigs (Dual RTX 4090/5090)</div>
+                    <div class="flex items-center gap-2">✓ Board-Level Multimeter & IR Triage</div>
+                    <div class="flex items-center gap-2">✓ Up to 3-Year Hardware Warranty</div>
+                </div>
+            </div>
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                <div>
+                    <span class="text-[10px] text-slate-400 block">Diagnostic bench fee</span>
+                    <span class="text-sm font-bold font-mono text-cyan-400">KSh 5,000</span>
+                </div>
+                <a href="/hardware" class="text-xs font-semibold text-cyan-300 hover:text-white flex items-center gap-1">
+                    View Hardware Store →
+                </a>
+            </div>
+        </div>
+
+        <!-- 4. IT Technical Support -->
+        <div class="glass-panel glass-panel-hover p-6 flex flex-col justify-between">
+            <div>
+                <div class="w-12 h-12 rounded-lg bg-cyan-950 border border-cyan-400/40 flex items-center justify-center text-cyan-400 mb-4 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+                    <i data-lucide="shield-alert" class="w-6 h-6"></i>
+                </div>
+                <span class="text-[11px] font-bold text-cyan-400 uppercase tracking-wider">Vertical 04</span>
+                <h3 class="text-xl font-bold text-white mt-1 mb-2">24/7 Managed IT Support</h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                    Round-the-clock proactive endpoint protection, zero-trust network access, immutable ransomware-proof backups, and rapid remote rescue dispatch.
+                </p>
+                <div class="space-y-1.5 text-xs text-slate-400 mb-6">
+                    <div class="flex items-center gap-2">✓ 15-Minute Critical SLA Guarantee</div>
+                    <div class="flex items-center gap-2">✓ Zero-Trust Perimeter Hardening</div>
+                    <div class="flex items-center gap-2">✓ Automated Disaster Recovery</div>
+                </div>
+            </div>
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                <div>
+                    <span class="text-[10px] text-slate-400 block">Monthly retainer</span>
+                    <span class="text-sm font-bold font-mono text-cyan-400">KSh 65,000 / mo</span>
+                </div>
+                <a href="/services#it_support" class="text-xs font-semibold text-cyan-300 hover:text-white flex items-center gap-1">
+                    Book IT Assessment →
+                </a>
+            </div>
+        </div>
+
+        <!-- 5. Green Tech & Electronic Waste Recycling -->
+        <div class="glass-panel glass-panel-hover p-6 flex flex-col justify-between border-emerald-500/30">
+            <div>
+                <div class="w-12 h-12 rounded-lg bg-emerald-950/60 border border-emerald-400/40 flex items-center justify-center text-emerald-400 mb-4 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                    <i data-lucide="recycle" class="w-6 h-6"></i>
+                </div>
+                <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider">Vertical 05</span>
+                <h3 class="text-xl font-bold text-white mt-1 mb-2">Green Tech & E-Waste Recycling</h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                    Certified zero-landfill electronic waste recycling, instant cash trade-in buybacks for enterprise fleets, DoD 5220.22-M certified data wipe, and ESG Carbon Offset Certificates.
+                </p>
+                <div class="space-y-1.5 text-xs text-slate-400 mb-6">
+                    <div class="flex items-center gap-2">✓ Instant Trade-In Cash Valuation</div>
+                    <div class="flex items-center gap-2">✓ Serialized Destruction Audit Trail</div>
+                    <div class="flex items-center gap-2">✓ Official Corporate ESG Certificates</div>
+                </div>
+            </div>
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                <div>
+                    <span class="text-[10px] text-slate-400 block">Environmental impact</span>
+                    <span class="text-sm font-bold font-mono text-emerald-400">100% Zero-Landfill</span>
+                </div>
+                <a href="/green-tech" class="text-xs font-semibold text-emerald-300 hover:text-white flex items-center gap-1">
+                    Calculate Payout & CO2 →
+                </a>
+            </div>
+        </div>
+
+        <!-- 6. Technology Education & Programming Tutorials -->
+        <div class="glass-panel glass-panel-hover p-6 flex flex-col justify-between">
+            <div>
+                <div class="w-12 h-12 rounded-lg bg-cyan-950 border border-cyan-400/40 flex items-center justify-center text-cyan-400 mb-4 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+                    <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                </div>
+                <span class="text-[11px] font-bold text-cyan-400 uppercase tracking-wider">Vertical 06</span>
+                <h3 class="text-xl font-bold text-white mt-1 mb-2">Tech Education & Tutorials</h3>
+                <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                    Hands-on masterclasses covering autonomous AI agent engineering, hardware micro-soldering diagnostics, and full-stack telemetry, mentored by Ted 24/7.
+                </p>
+                <div class="space-y-1.5 text-xs text-slate-400 mb-6">
+                    <div class="flex items-center gap-2">✓ Interactive Code Sandboxes</div>
+                    <div class="flex items-center gap-2">✓ Ted 24/7 AI Code Reviewer</div>
+                    <div class="flex items-center gap-2">✓ Industry Recognized Accreditation</div>
+                </div>
+            </div>
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                <div>
+                    <span class="text-[10px] text-slate-400 block">Course access</span>
+                    <span class="text-sm font-bold font-mono text-cyan-400">KSh 18,500 / course</span>
+                </div>
+                <a href="/education" class="text-xs font-semibold text-cyan-300 hover:text-white flex items-center gap-1">
+                    Start Learning →
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Human-In-The-Loop Approval Assurance Banner -->
+<section class="py-12 border-y border-cyan-500/20 bg-[#060b18]/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="glass-panel p-8 border-cyan-400/30 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full bg-cyan-950 border border-cyan-400 flex items-center justify-center text-cyan-300 shrink-0 shadow-[0_0_15px_rgba(0,240,255,0.3)]">
+                    <i data-lucide="user-check" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Autonomous Intelligence with Executive Human Oversight</h3>
+                    <p class="text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
+                        While Ted rapidly scopes your requirements, estimates costs, and troubleshoots symptoms in seconds, all commercial quotations, on-site technician dispatches, and green ESG certificates strictly require <strong>Executive Human Verification</strong> before binding execution.
+                    </p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+                <a href="/dashboard" class="auth-staff-only hidden btn-electric text-xs py-2 px-4">
+                    Open Approval Queue
+                </a>
+                <a href="/ted" class="btn-outline-electric text-xs py-2 px-4">
+                    Generate Quote with Ted
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Hero Ted AI interaction helper
+    async function sendHeroPrompt(msg) {
+        const input = document.getElementById('hero-ted-input');
+        if (input) input.value = msg;
+        const thread = document.getElementById('hero-ted-thread');
+        
+        // Append user bubble
+        const uDiv = document.createElement('div');
+        uDiv.className = 'flex justify-end';
+        uDiv.innerHTML = `<div class="bg-slate-800 text-slate-100 p-2.5 rounded-lg max-w-[85%] text-xs">${Ted.escapeHtml(msg)}</div>`;
+        thread.appendChild(uDiv);
+        thread.scrollTop = thread.scrollHeight;
+
+        try {
+            const res = await fetch('/api/ted/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: msg })
+            });
+            const data = await res.json();
+
+            const tDiv = document.createElement('div');
+            tDiv.className = 'flex items-start gap-2.5';
+            tDiv.innerHTML = `
+                <div class="w-6 h-6 rounded-full bg-cyan-950 border border-cyan-400 text-cyan-300 text-[10px] font-bold flex items-center justify-center shrink-0">T</div>
+                <div class="bg-cyan-950/70 border border-cyan-500/30 p-3 rounded-lg text-slate-200 leading-relaxed text-xs">
+                    ${Ted.formatMarkdown(data.reply)}
+                </div>
+            `;
+            thread.appendChild(tDiv);
+            thread.scrollTop = thread.scrollHeight;
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    const heroForm = document.getElementById('hero-ted-form');
+    if (heroForm) {
+        heroForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = document.getElementById('hero-ted-input');
+            const val = input.value.trim();
+            if (val) {
+                sendHeroPrompt(val);
+                input.value = '';
+            }
+        });
+    }
+</script>
+{% endblock %}

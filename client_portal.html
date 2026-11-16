@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}Client Portal | MaxReT3ch AI{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    
+    <!-- Portal Header -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-cyan-500/20 gap-4 mb-8">
+        <div>
+            <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-500/40 text-xs font-semibold mb-2">
+                <span>Client Self-Service Dashboard</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-white">
+                Project Cockpit & Asset Management
+            </h1>
+            <p class="text-xs text-slate-400 mt-0.5">
+                Track your active quotations, hardware repair bench progress, and ESG e-waste carbon certificates.
+            </p>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <a href="/ted" class="btn-electric text-xs py-2 px-4">
+                <span>Message Ted AI</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Active Proposals & Quotations Section -->
+    <div class="glass-panel p-6 mb-10 border-cyan-500/30">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
+            <h2 class="text-base font-bold text-white flex items-center gap-2">
+                <i data-lucide="file-check" class="w-4 h-4 text-cyan-400"></i>
+                <span>Your Commercial Quotations & Proposals</span>
+            </h2>
+            <span class="text-xs text-slate-400">All proposals scoped with Ted AI</span>
+        </div>
+
+        <div id="portal-proposals" class="space-y-3">
+            <!-- Dynamically populated -->
+        </div>
+    </div>
+
+    <!-- Grid: Repair Tickets & E-Waste Submissions -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- Repair Tickets Column -->
+        <div class="glass-panel p-6 border-slate-800">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <i data-lucide="wrench" class="w-4 h-4 text-amber-400"></i>
+                    <span>Hardware Bench Tickets</span>
+                </h3>
+                <a href="/hardware#repair-section" class="text-xs text-cyan-400 hover:underline">+ New Ticket</a>
+            </div>
+
+            <div id="portal-tickets" class="space-y-3">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+
+        <!-- E-Waste & Carbon Offsets Column -->
+        <div class="glass-panel p-6 border-slate-800">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <i data-lucide="recycle" class="w-4 h-4 text-emerald-400"></i>
+                    <span>E-Waste Recycling & ESG Certificates</span>
+                </h3>
+                <a href="/green-tech" class="text-xs text-emerald-400 hover:underline">+ New Intake</a>
+            </div>
+
+            <div id="portal-ewaste" class="space-y-3">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    async function loadClientData() {
+        // Load proposals
+        try {
+            const res = await fetch('/api/proposals');
+            const data = await res.json();
+            const list = data.proposals || [];
+
+            const pContainer = document.getElementById('portal-proposals');
+            if (list.length === 0) {
+                pContainer.innerHTML = `<div class="p-4 text-center text-slate-500 text-xs">No proposals found. Chat with Ted to generate your first quotation!</div>`;
+            } else {
+                pContainer.innerHTML = list.map(p => {
+                    const statusPill = p.human_status === 'approved'
+                        ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">✓ APPROVED (READY TO SIGN)</span>'
+                        : p.human_status === 'signed'
+                        ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">✓ SIGNED CONTRACT</span>'
+                        : '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">⚠️ PENDING HUMAN REVIEW</span>';
+
+                    return `
+                        <div class="p-4 rounded-lg bg-black/40 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="font-mono text-cyan-400 font-bold text-xs">${p.quote_number}</span>
+                                    ${statusPill}
+                                </div>
+                                <div class="text-sm font-semibold text-white">${p.project_title}</div>
+                                <div class="text-xs text-slate-400 mt-0.5">Delivery: ${p.estimated_days} business days • Client: ${p.client_name}</div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="text-right">
+                                    <span class="text-xs text-slate-400 block">Total</span>
+                                    <span class="text-sm font-bold font-mono text-cyan-300">${App.formatCurrency(p.total_amount)}</span>
+                                </div>
+                                <a href="/proposal/${p.quote_number}" class="btn-electric text-xs py-1.5 px-3">
+                                    View Proposal
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        } catch (e) {
+            console.error(e);
+        }
+
+        // Load tickets
+        try {
+            const res = await fetch('/api/tickets');
+            const data = await res.json();
+            const list = data.tickets || [];
+            const tContainer = document.getElementById('portal-tickets');
+            if (list.length === 0) {
+                tContainer.innerHTML = `<div class="p-4 text-center text-slate-500 text-xs">No active repair tickets.</div>`;
+            } else {
+                tContainer.innerHTML = list.map(t => `
+                    <div class="p-3 rounded-lg bg-black/40 border border-slate-800 text-xs">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-mono font-bold text-amber-400">${t.ticket_code}</span>
+                            <span class="px-2 py-0.5 rounded text-[10px] uppercase font-semibold bg-slate-800 text-slate-300">${t.status.replace('_', ' ')}</span>
+                        </div>
+                        <div class="font-semibold text-white">${t.device_model}</div>
+                        <div class="text-slate-400 mt-1">${t.symptoms}</div>
+                        <div class="mt-2 text-[11px] text-cyan-400 font-mono">Triage: ${t.diagnosis_by_ted.substring(0, 100)}...</div>
+                    </div>
+                `).join('');
+            }
+        } catch (e) {
+            console.error(e);
+        }
+
+        // Load e-waste
+        try {
+            const res = await fetch('/api/ewaste');
+            const data = await res.json();
+            const list = data.submissions || [];
+            const eContainer = document.getElementById('portal-ewaste');
+            if (list.length === 0) {
+                eContainer.innerHTML = `<div class="p-4 text-center text-slate-500 text-xs">No e-waste submissions yet.</div>`;
+            } else {
+                eContainer.innerHTML = list.map(sub => `
+                    <div class="p-3 rounded-lg bg-black/40 border border-slate-800 text-xs">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-mono font-bold text-emerald-400">${sub.submission_code}</span>
+                            <span class="text-emerald-300 font-mono font-semibold">${App.formatCurrency(sub.calculated_tradein_value)}</span>
+                        </div>
+                        <div class="text-white font-medium capitalize">${sub.quantity}x ${sub.device_type.replace('_', ' ')} (${sub.device_condition})</div>
+                        <div class="flex items-center justify-between mt-2 pt-2 border-t border-slate-800/80 text-[11px]">
+                            <span class="text-cyan-400 font-mono">CO2 Offset: ${sub.carbon_offset_kg} kg</span>
+                            <span class="text-emerald-400 font-semibold">${sub.certificate_issued ? '✓ ESG CERTIFIED' : 'Processing'}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadClientData();
+    });
+</script>
+{% endblock %}

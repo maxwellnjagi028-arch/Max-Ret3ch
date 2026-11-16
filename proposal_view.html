@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+
+{% block title %}Commercial Quotation {{ quote_number }} | MaxReT3ch AI{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-10">
+    
+    <!-- Top Action Toolbar (Hidden in Print) -->
+    <div class="no-print flex items-center justify-between mb-6 pb-4 border-b border-slate-800">
+        <a href="/ted" class="text-xs text-slate-400 hover:text-cyan-400 flex items-center gap-1.5">
+            ← Back to Ted AI Cockpit
+        </a>
+        <div class="flex items-center gap-3">
+            <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg border border-slate-700 bg-slate-900 text-slate-200 text-xs font-semibold hover:border-cyan-400 transition-all flex items-center gap-1.5">
+                <i data-lucide="printer" class="w-4 h-4"></i>
+                <span>Print / Save PDF</span>
+            </button>
+            <button id="sign-proposal-btn" onclick="signProposal()" class="btn-electric text-xs py-1.5 px-4 flex items-center gap-1.5">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                <span>Sign & Accept Proposal</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- The Printable Document Container -->
+    <div id="proposal-doc" class="glass-panel p-8 sm:p-12 border-cyan-500/30 text-slate-100 shadow-2xl relative">
+        
+        <!-- Header / Letterhead -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-8 border-b border-slate-800 gap-6">
+            <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-black text-white tracking-tight">MaxReT3ch AI</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/40 font-mono font-bold">COMMERCIAL QUOTE</span>
+                </div>
+                <div class="text-xs text-slate-400 font-mono">Autonomous AI, High-Performance Compute & Clean Tech</div>
+                <div class="text-[11px] text-slate-500">742 Cyber Plaza, Tech Corridor • contact@maxret3ch.ai • +1 (800) 555-RET3CH</div>
+            </div>
+
+            <div class="sm:text-right space-y-1">
+                <div class="text-xs text-slate-400 uppercase font-mono">Quotation Reference</div>
+                <div id="prop-quote-num" class="text-xl font-extrabold font-mono text-cyan-400">Loading...</div>
+                <div id="prop-date" class="text-xs text-slate-400">Date: --</div>
+            </div>
+        </div>
+
+        <!-- Human Approval Governance Status Banner -->
+        <div id="approval-banner" class="my-6 p-4 rounded-lg flex items-center justify-between gap-4 border text-xs">
+            <!-- Dynamically populated based on human_status -->
+        </div>
+
+        <!-- Client & Scope Details Meta -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 my-8 p-5 rounded-xl bg-black/40 border border-slate-800 text-xs">
+            <div>
+                <span class="text-slate-400 font-mono uppercase text-[10px] block mb-1">Prepared For</span>
+                <div id="prop-client-name" class="font-bold text-white text-sm">--</div>
+                <div id="prop-client-email" class="text-slate-300">--</div>
+                <div id="prop-client-company" class="text-slate-400">--</div>
+            </div>
+            <div>
+                <span class="text-slate-400 font-mono uppercase text-[10px] block mb-1">Project Specification</span>
+                <div id="prop-project-title" class="font-bold text-cyan-300 text-sm">--</div>
+                <div id="prop-vertical" class="text-slate-300 capitalize">--</div>
+                <div id="prop-turnaround" class="text-slate-400">Estimated Delivery: --</div>
+            </div>
+        </div>
+
+        <!-- Scope Narrative -->
+        <div class="mb-8">
+            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono mb-2">Scope of Work & Deliverables</h4>
+            <div id="prop-scope" class="text-xs text-slate-300 leading-relaxed p-4 rounded-lg bg-black/30 border border-slate-800/80">
+                --
+            </div>
+        </div>
+
+        <!-- Itemized Cost Breakdown Table -->
+        <div class="mb-8 overflow-x-auto">
+            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono mb-3">Itemized Engineering Breakdown</h4>
+            <table class="w-full text-xs text-left border border-slate-800">
+                <thead class="bg-black/60 border-b border-slate-800 font-mono text-[11px] text-slate-400">
+                    <tr>
+                        <th class="py-2.5 px-4">Deliverable / Architecture Component</th>
+                        <th class="py-2.5 px-4 text-center">Qty</th>
+                        <th class="py-2.5 px-4 text-right">Unit Rate</th>
+                        <th class="py-2.5 px-4 text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="prop-items-body" class="divide-y divide-slate-800/80">
+                    <!-- Loaded dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Totals Calculation -->
+        <div class="flex justify-end mb-10">
+            <div class="w-72 space-y-2 text-xs font-mono">
+                <div class="flex justify-between text-slate-400">
+                    <span>Engineering Subtotal:</span>
+                    <span id="prop-subtotal" class="text-slate-200">$--</span>
+                </div>
+                <div class="flex justify-between text-cyan-400">
+                    <span>Ted Autonomous Incentive (8%):</span>
+                    <span id="prop-discount">-$--</span>
+                </div>
+                <div class="flex justify-between text-slate-400">
+                    <span>Estimated Tax / Compliance (8%):</span>
+                    <span id="prop-tax" class="text-slate-200">$--</span>
+                </div>
+                <div class="pt-2 border-t border-slate-700 flex justify-between text-base font-bold">
+                    <span class="text-white">Total Investment:</span>
+                    <span id="prop-total" class="text-cyan-400">$--</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Executive Sign-Off Signatures Block -->
+        <div class="pt-8 border-t border-slate-800 grid grid-cols-2 gap-8 text-xs">
+            <div>
+                <span class="text-[10px] text-slate-500 font-mono uppercase block mb-6">Autonomous AI Preparer</span>
+                <div class="font-mono text-cyan-400 font-bold">Ted (AI Operations Specialist)</div>
+                <div class="text-[11px] text-slate-400">MaxReT3ch Autonomous Engine v2.4</div>
+            </div>
+            <div>
+                <span class="text-[10px] text-slate-500 font-mono uppercase block mb-6">Executive Management Review</span>
+                <div id="prop-sign-officer" class="font-mono text-white font-bold">Pending Human Sign-off</div>
+                <div id="prop-sign-notes" class="text-[11px] text-slate-400">Awaiting executive review in Dashboard</div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    const quoteNumber = window.location.pathname.split('/').pop();
+
+    async function loadProposal() {
+        try {
+            const res = await fetch(`/api/proposals/${quoteNumber}`);
+            if (!res.ok) {
+                App.showToast("Quotation not found", "error");
+                return;
+            }
+            const data = await res.json();
+            const p = data.proposal;
+
+            document.getElementById('prop-quote-num').textContent = p.quote_number;
+            document.getElementById('prop-date').textContent = `Created: ${p.created_at.split('T')[0]}`;
+            document.getElementById('prop-client-name').textContent = p.client_name;
+            document.getElementById('prop-client-email').textContent = p.client_email;
+            document.getElementById('prop-client-company').textContent = p.client_company || 'Independent Enterprise';
+            document.getElementById('prop-project-title').textContent = p.project_title;
+            document.getElementById('prop-vertical').textContent = p.vertical.replace('_', ' ');
+            document.getElementById('prop-turnaround').textContent = `Estimated Delivery: ${p.estimated_days} Business Days`;
+            document.getElementById('prop-scope').textContent = p.scope_details;
+
+            // Items table
+            const tbody = document.getElementById('prop-items-body');
+            tbody.innerHTML = (p.itemized_costs || []).map(it => `
+                <tr class="hover:bg-black/30">
+                    <td class="py-2.5 px-4 font-medium text-slate-200">${it.item}</td>
+                    <td class="py-2.5 px-4 text-center font-mono text-slate-400">${it.qty}</td>
+                    <td class="py-2.5 px-4 text-right font-mono text-slate-300">${App.formatCurrency(it.rate)}</td>
+                    <td class="py-2.5 px-4 text-right font-mono font-semibold text-cyan-300">${App.formatCurrency(it.total)}</td>
+                </tr>
+            `).join('');
+
+            // Totals
+            document.getElementById('prop-subtotal').textContent = App.formatCurrency(p.subtotal);
+            document.getElementById('prop-discount').textContent = `-${App.formatCurrency(p.discount)}`;
+            document.getElementById('prop-tax').textContent = App.formatCurrency(p.tax);
+            document.getElementById('prop-total').textContent = App.formatCurrency(p.total_amount);
+
+            // Approval Banner
+            const banner = document.getElementById('approval-banner');
+            const signOfficer = document.getElementById('prop-sign-officer');
+            const signNotes = document.getElementById('prop-sign-notes');
+
+            if (p.human_status === 'pending_approval') {
+                banner.className = 'my-6 p-4 rounded-lg bg-amber-500/10 border border-amber-500/40 text-xs flex items-center justify-between text-amber-300';
+                banner.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="clock" class="w-5 h-5 text-amber-400 shrink-0"></i>
+                        <div>
+                            <span class="font-bold block text-sm">⚠️ Pending Executive Human Approval</span>
+                            <span>This quotation was structured by Ted AI. It has been routed to our Managing Director for quality and feasibility review prior to binding confirmation.</span>
+                        </div>
+                    </div>
+                    <a href="/dashboard" class="auth-staff-only hidden px-3 py-1.5 rounded bg-amber-500 text-black font-bold text-xs hover:bg-amber-400 transition-colors shrink-0">
+                        Approve in Dashboard →
+                    </a>
+                `;
+            } else if (p.human_status === 'approved' || p.human_status === 'sent_to_client') {
+                banner.className = 'my-6 p-4 rounded-lg bg-emerald-500/10 border border-emerald-500/40 text-xs flex items-center gap-3 text-emerald-300';
+                banner.innerHTML = `
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0"></i>
+                    <div>
+                        <span class="font-bold block text-sm">✓ Executive Approved & Binding</span>
+                        <span>Approved by <strong>${p.approved_by || 'Executive Leadership'}</strong> on ${p.approved_at ? p.approved_at.split('T')[0] : 'recent'}. Ready for client countersignature.</span>
+                    </div>
+                `;
+                signOfficer.textContent = p.approved_by || 'Max Reynolds (Managing Director)';
+                signNotes.textContent = p.approval_notes || 'Verified scope & commercial terms.';
+            } else if (p.human_status === 'signed') {
+                banner.className = 'my-6 p-4 rounded-lg bg-cyan-500/10 border border-cyan-500/40 text-xs flex items-center gap-3 text-cyan-300';
+                banner.innerHTML = `
+                    <i data-lucide="shield-check" class="w-5 h-5 text-cyan-400 shrink-0"></i>
+                    <div>
+                        <span class="font-bold block text-sm">✓ Fully Executed & Signed Contract</span>
+                        <span>This agreement has been signed by both parties. Production sprint is active.</span>
+                    </div>
+                `;
+                signOfficer.textContent = p.approved_by || 'Max Reynolds (Managing Director)';
+                signNotes.textContent = 'Execution complete.';
+                document.getElementById('sign-proposal-btn').classList.add('hidden');
+            }
+
+            lucide.createIcons();
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async function signProposal() {
+        if (!confirm(`Are you ready to digitally accept and sign quotation ${quoteNumber}?`)) return;
+
+        try {
+            const res = await fetch(`/api/proposals/${quoteNumber}/sign`, { method: 'POST' });
+            const data = await res.json();
+            if (res.ok) {
+                App.showToast("Proposal digitally signed and confirmed!", "success");
+                loadProposal();
+            } else {
+                App.showToast("Signature failed", "error");
+            }
+        } catch (e) {
+            App.showToast("Network error", "error");
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadProposal();
+    });
+</script>
+{% endblock %}

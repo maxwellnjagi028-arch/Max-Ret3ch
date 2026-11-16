@@ -1,0 +1,193 @@
+/* MaxReT3ch AI - Futuristic Visual Identity */
+:root {
+  --bg-primary: #02040a;
+  --bg-secondary: #060b18;
+  --bg-card: rgba(10, 19, 43, 0.75);
+  --bg-card-hover: rgba(15, 28, 64, 0.9);
+  --electric-blue: #00f0ff;
+  --electric-blue-glow: rgba(0, 240, 255, 0.35);
+  --accent-blue: #0ea5e9;
+  --deep-blue: #1e3a8a;
+  --silver-slate: #94a3b8;
+  --silver-light: #e2e8f0;
+  --text-primary: #f8fafc;
+  --text-muted: #64748b;
+  --border-neon: rgba(0, 240, 255, 0.25);
+  --border-neon-strong: rgba(0, 240, 255, 0.6);
+  --success-green: #10b981;
+  --warning-amber: #f59e0b;
+  --danger-rose: #f43f5e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Futuristic Cybernetic Background Grid */
+.cyber-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glowing Neon Elements */
+.neon-glow {
+  box-shadow: 0 0 20px var(--electric-blue-glow);
+}
+
+.neon-text {
+  color: var(--electric-blue);
+  text-shadow: 0 0 12px var(--electric-blue-glow);
+}
+
+.neon-border {
+  border: 1px solid var(--border-neon);
+}
+
+.neon-border-hover:hover {
+  border-color: var(--electric-blue);
+  box-shadow: 0 0 15px var(--electric-blue-glow);
+}
+
+/* Glassmorphism Cards */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-neon);
+  border-radius: 12px;
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-hover:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-neon-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 240, 255, 0.15);
+}
+
+/* Futuristic Buttons */
+.btn-electric {
+  background: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%);
+  color: #02040a;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.65rem 1.4rem;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-electric:hover {
+  background: linear-gradient(135deg, #38bdf8 0%, #00f0ff 100%);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.65);
+  transform: translateY(-1px);
+}
+
+.btn-outline-electric {
+  background: transparent;
+  color: var(--electric-blue);
+  border: 1px solid var(--electric-blue);
+  border-radius: 8px;
+  padding: 0.65rem 1.4rem;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-outline-electric:hover {
+  background: rgba(0, 240, 255, 0.12);
+  box-shadow: 0 0 15px var(--electric-blue-glow);
+  color: #fff;
+}
+
+/* Ted Pulse Ring Animation */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 12px rgba(0, 240, 255, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 240, 255, 0);
+  }
+}
+
+.ted-avatar-pulse {
+  animation: pulse-ring 2.5s infinite;
+}
+
+/* Chat Bubbles */
+.chat-bubble-user {
+  background: #1e293b;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px 14px 2px 14px;
+}
+
+.chat-bubble-ted {
+  background: rgba(14, 27, 59, 0.85);
+  border: 1px solid var(--border-neon);
+  border-radius: 14px 14px 14px 2px;
+  box-shadow: 0 4px 20px rgba(0, 240, 255, 0.08);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #02040a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e3a8a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00f0ff;
+}
+
+/* Printable Proposal Styles */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .glass-panel {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    color: #000000 !important;
+  }
+  .print-clean {
+    color: #0f172a !important;
+  }
+}

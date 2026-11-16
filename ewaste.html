@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+
+{% block title %}Green Tech & E-Waste Recycling | MaxReT3ch AI{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    
+    <!-- Hero Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-400/40 text-emerald-300 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>Vertical 05 • Zero-Landfill Certified Facility</span>
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Turn Depreciated Tech into Capital & <span class="text-emerald-400">Carbon Credits</span>
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300">
+            Over 50 million metric tons of e-waste enter landfills annually. MaxReT3ch AI provides DoD 5220.22-M compliant data destruction, immediate buyback payouts, and serialized ESG Carbon Offset Certificates.
+        </p>
+    </div>
+
+    <!-- Live Interactive Trade-In & Carbon Calculator -->
+    <div class="glass-panel p-8 mb-16 border-emerald-500/40 shadow-[0_0_30px_rgba(16,185,129,0.1)]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Controls (6 cols) -->
+            <div class="lg:col-span-6 space-y-6">
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i data-lucide="calculator" class="w-5 h-5 text-emerald-400"></i>
+                        <span>Instant Trade-In & Carbon Offset Calculator</span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">Select hardware specifications to calculate estimated payout and environmental impact.</p>
+                </div>
+
+                <div class="space-y-4 text-xs">
+                    <div>
+                        <label class="block text-slate-300 mb-1 font-semibold">Device / Equipment Category</label>
+                        <select id="calc-device" onchange="runCalculation()" class="w-full bg-black/70 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:border-emerald-400 outline-none">
+                            <option value="server_rack">Enterprise 1U/2U Server Racks</option>
+                            <option value="workstation">High-End Compute Workstations</option>
+                            <option value="laptop" selected>Business Laptops (Dell, ThinkPad, Apple)</option>
+                            <option value="desktop">Tower Desktops & Small Form Factor PCs</option>
+                            <option value="gpu">Dedicated GPUs (RTX 30/40 Series, Quadro)</option>
+                            <option value="smartphone">Smartphones & Cellular Tablets</option>
+                            <option value="monitor">IPS & OLED Display Monitors</option>
+                            <option value="mixed_lot">Mixed Corporate IT Scrap Lot</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-slate-300 mb-1 font-semibold">Quantity of Units</label>
+                            <input type="number" id="calc-qty" min="1" max="1000" value="10" oninput="runCalculation()" class="w-full bg-black/70 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:border-emerald-400 outline-none font-mono">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1 font-semibold">Physical Condition</label>
+                            <select id="calc-condition" onchange="runCalculation()" class="w-full bg-black/70 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:border-emerald-400 outline-none">
+                                <option value="working" selected>Functional / Working</option>
+                                <option value="damaged">Cosmetic / Minor Screen Damage</option>
+                                <option value="dead_motherboard">Dead Motherboard / No Boot</option>
+                                <option value="scrap">Raw Parts / Component Scrap</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-300 mb-1 font-semibold">Preferred Processing Type</label>
+                        <select id="calc-process" class="w-full bg-black/70 border border-slate-700 rounded-lg px-3 py-2 text-slate-100 focus:border-emerald-400 outline-none">
+                            <option value="refurbish_reuse">Refurbish & High-Value Reconditioning</option>
+                            <option value="secure_data_wipe">DoD 5220.22-M Certified Data Shredding</option>
+                            <option value="certified_metal_recovery">Zero-Landfill Precious Metal Refining</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calculation Output Dashboard (6 cols) -->
+            <div class="lg:col-span-6 p-6 rounded-2xl bg-[#040d1a] border border-emerald-500/40 space-y-6">
+                <div class="flex items-center justify-between pb-3 border-b border-emerald-500/20">
+                    <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Estimated ESG Valuation</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">CERTIFIED IMPACT</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 rounded-xl bg-black/50 border border-slate-800">
+                        <span class="text-xs text-slate-400 block mb-1">Total Cash Buyback Payout</span>
+                        <span id="res-payout" class="text-3xl font-extrabold font-mono text-emerald-400">$1,800.00</span>
+                        <span class="text-[10px] text-slate-500 block mt-1">Direct wire or credit voucher</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-black/50 border border-slate-800">
+                        <span class="text-xs text-slate-400 block mb-1">Avoided Carbon Emissions</span>
+                        <span id="res-carbon" class="text-3xl font-extrabold font-mono text-cyan-400">320.0 kg</span>
+                        <span class="text-[10px] text-slate-500 block mt-1">Verified CO2 reduction</span>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/30 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-emerald-900/60 flex items-center justify-center text-emerald-400 text-xl font-bold shrink-0">
+                        🌲
+                    </div>
+                    <div class="text-xs">
+                        <span class="font-bold text-white block">Environmental Equivalency:</span>
+                        <span class="text-slate-300">Equivalent to planting <strong id="res-trees" class="text-emerald-300">15.2 trees</strong> surviving for one full year.</span>
+                    </div>
+                </div>
+
+                <button onclick="openSubmissionModal()" class="w-full btn-electric py-3 text-xs font-bold text-center">
+                    Schedule Batch Pickup & Claim Buyback
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Corporate Batch Submission Form Section -->
+    <div id="submission-section" class="glass-panel p-8 border-slate-800">
+        <h2 class="text-2xl font-bold text-white mb-2">Book Corporate E-Waste Recycling Intake</h2>
+        <p class="text-xs text-slate-400 mb-6 max-w-2xl">
+            Our logistics team provides complimentary on-site collection for batches of 5+ devices within metropolitan tech corridors, complete with chain-of-custody transfer manifests.
+        </p>
+
+        <form id="ewaste-submit-form" class="space-y-4 text-xs max-w-3xl">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-slate-300 mb-1">Company / Organization *</label>
+                    <input type="text" id="sub-client" required placeholder="e.g. Horizon Fintech Group" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-white focus:border-emerald-400 outline-none">
+                </div>
+                <div>
+                    <label class="block text-slate-300 mb-1">Executive Email Address *</label>
+                    <input type="email" id="sub-email" required placeholder="sustainability@horizonfin.com" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-white focus:border-emerald-400 outline-none">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-slate-300 mb-1">Contact Phone</label>
+                    <input type="tel" id="sub-phone" placeholder="+1 (555) 888-0123" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-white focus:border-emerald-400 outline-none">
+                </div>
+                <div>
+                    <label class="block text-slate-300 mb-1">Pickup Facility Address</label>
+                    <input type="text" id="sub-address" placeholder="100 Silicon Way, Suite 400" class="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-white focus:border-emerald-400 outline-none">
+                </div>
+            </div>
+
+            <button type="submit" class="btn-electric py-2.5 px-6 text-xs font-bold">
+                Confirm Intake Request & Issue Tracking Manifest
+            </button>
+        </form>
+
+        <div id="sub-result" class="hidden mt-6 p-4 rounded-lg bg-emerald-950/60 border border-emerald-400 text-xs"></div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    async function runCalculation() {
+        const deviceType = document.getElementById('calc-device').value;
+        const qty = parseInt(document.getElementById('calc-qty').value) || 1;
+        const condition = document.getElementById('calc-condition').value;
+
+        try {
+            const res = await fetch('/api/ewaste/calculate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ device_type: deviceType, quantity: qty, condition: condition })
+            });
+            const data = await res.json();
+
+            document.getElementById('res-payout').textContent = App.formatCurrency(data.estimated_tradein_value);
+            document.getElementById('res-carbon').textContent = `${data.carbon_offset_kg.toLocaleString()} kg`;
+            document.getElementById('res-trees').textContent = `${data.trees_equivalent} trees`;
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    function openSubmissionModal() {
+        const el = document.getElementById('submission-section');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        runCalculation();
+
+        const form = document.getElementById('ewaste-submit-form');
+        const resBox = document.getElementById('sub-result');
+        if (form && resBox) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const payload = {
+                    client_name: document.getElementById('sub-client').value,
+                    client_email: document.getElementById('sub-email').value,
+                    client_phone: document.getElementById('sub-phone').value,
+                    device_type: document.getElementById('calc-device').value,
+                    quantity: parseInt(document.getElementById('calc-qty').value) || 1,
+                    device_condition: document.getElementById('calc-condition').value,
+                    recycling_type: document.getElementById('calc-process').value
+                };
+
+                try {
+                    const res = await fetch('/api/ewaste/submit', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        resBox.classList.remove('hidden');
+                        resBox.innerHTML = `
+                            <div class="font-bold text-emerald-300 text-sm mb-1">✓ Recycling Batch ${data.submission_code} Confirmed!</div>
+                            <div class="text-slate-200 mb-2">Total Buyback Payout: <strong class="text-emerald-400 font-mono">${App.formatCurrency(data.tradein_value)}</strong> | CO2 Offset: <strong class="text-cyan-400 font-mono">${data.carbon_offset_kg} kg</strong></div>
+                            <div class="text-slate-400 text-[11px]">Chain-of-custody transfer manifest and DoD data wipe agreement sent to ${payload.client_email}. Once inspected, an official ESG Carbon Offset Certificate will be issued.</div>
+                        `;
+                        App.showToast(`Batch ${data.submission_code} registered!`, 'success');
+                    }
+                } catch (err) {
+                    App.showToast("Failed to book intake", "error");
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

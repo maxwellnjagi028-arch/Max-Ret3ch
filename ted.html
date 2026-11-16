@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block title %}Ted AI Employee Cockpit | MaxReT3ch AI{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+    <!-- Cockpit Header -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-cyan-500/20 gap-4">
+        <div class="flex items-center gap-4">
+            <div class="relative">
+                <div class="w-14 h-14 rounded-full bg-cyan-950 border-2 border-cyan-400 flex items-center justify-center text-cyan-300 font-extrabold text-lg shadow-[0_0_20px_rgba(0,240,255,0.6)]">
+                    TED
+                </div>
+                <span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-[#02040a] shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <h1 class="text-xl sm:text-2xl font-extrabold text-white">Ted • Autonomous AI Operations Specialist</h1>
+                    <span class="px-2 py-0.5 rounded bg-cyan-950 border border-cyan-400 text-cyan-300 text-[10px] font-mono uppercase font-bold">DIGITAL EMPLOYEE</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-0.5">
+                    Authorized to quote commercial projects, triage hardware faults, calculate ESG recycling values, and coordinate operations.
+                </p>
+            </div>
+        </div>
+
+        <!-- Controls: Audio Voice Toggle & Mic -->
+        <div class="flex items-center gap-3">
+            <button id="ted-voice-toggle" class="px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-900/80 text-slate-300 text-xs font-semibold hover:border-cyan-400 transition-all flex items-center gap-1.5 shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+                <i data-lucide="volume-2" class="w-4 h-4"></i>
+                <span>Ted Audio Voice</span>
+            </button>
+            <button id="ted-mic-btn" class="px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-900/80 text-slate-300 text-xs font-semibold hover:border-cyan-400 transition-all flex items-center gap-1.5">
+                <i data-lucide="mic" class="w-4 h-4"></i>
+                <span>Voice Input</span>
+            </button>
+            <a href="/dashboard" class="auth-staff-only hidden px-3 py-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-semibold hover:bg-amber-500/30 transition-all flex items-center gap-1.5">
+                <i data-lucide="shield-check" class="w-4 h-4"></i>
+                <span>Executive Queue</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Cockpit Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+        
+        <!-- Left Column: Primary Conversation Stream (8 cols) -->
+        <div class="lg:col-span-8 flex flex-col h-[700px] glass-panel border-cyan-500/30 p-5 relative">
+            
+            <!-- Messages Scroll Area -->
+            <div id="ted-messages-container" class="flex-1 overflow-y-auto pr-2 space-y-4">
+                <!-- Ted Welcome Bubble -->
+                <div class="flex items-start gap-3 max-w-2xl mb-4">
+                    <div class="w-8 h-8 rounded-full bg-cyan-950 border border-cyan-400 flex items-center justify-center text-cyan-300 text-xs font-bold shrink-0 shadow-[0_0_10px_rgba(0,240,255,0.4)]">
+                        TED
+                    </div>
+                    <div class="chat-bubble-ted p-4 text-slate-200 text-sm leading-relaxed">
+                        Greetings! I am <strong>Ted</strong>, the autonomous operations specialist at <strong>MaxReT3ch AI</strong>.
+                        <div class="h-2"></div>
+                        I am equipped to handle all aspects of our business:
+                        <ul class="mt-2 space-y-1 text-xs">
+                            <li class="flex items-center gap-2">✓ <strong>AI Solutions</strong>: Deploy custom multi-agent ecosystems & private RAG vaults.</li>
+                            <li class="flex items-center gap-2">✓ <strong>Web & Software Dev</strong>: Build resilient full-stack platforms and SaaS applications.</li>
+                            <li class="flex items-center gap-2">✓ <strong>Hardware & Repair Lab</strong>: Configure extreme AI workstations or triage motherboards.</li>
+                            <li class="flex items-center gap-2">✓ <strong>24/7 Managed IT Support</strong>: Network defense, firewalls & emergency rescue.</li>
+                            <li class="flex items-center gap-2">✓ <strong>Green E-Waste Recycling</strong>: Instant trade-in cash value and certified ESG carbon credits.</li>
+                            <li class="flex items-center gap-2">✓ <strong>Tech Education</strong>: 24/7 interactive coding mentorship.</li>
+                        </ul>
+                        <div class="h-2"></div>
+                        How can I accelerate your technological operations today?
+                        
+                        <!-- Quick actions -->
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <button type="button" onclick="Ted.sendMessage('Can you generate an itemized project proposal for our company?')" class="px-2.5 py-1 rounded-full text-xs font-medium bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-900/60 transition-all">
+                                💡 Request Project Quotation
+                            </button>
+                            <button type="button" onclick="Ted.sendMessage('My workstation won\'t turn on after a power surge. Please diagnose.')" class="px-2.5 py-1 rounded-full text-xs font-medium bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-900/60 transition-all">
+                                🔧 Hardware Diagnostic
+                            </button>
+                            <button type="button" onclick="Ted.sendMessage('Calculate recycling value for 10 enterprise servers.')" class="px-2.5 py-1 rounded-full text-xs font-medium bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-900/60 transition-all">
+                                🌱 E-Waste Valuation
+                            </button>
+                            <button type="button" onclick="Ted.sendMessage('Draft a LinkedIn marketing campaign for our AI solutions.')" class="px-2.5 py-1 rounded-full text-xs font-medium bg-cyan-950/60 text-cyan-300 border border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-900/60 transition-all">
+                                📢 Generate Marketing Copy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Bar -->
+            <form id="ted-chat-form" class="mt-4 pt-3 border-t border-slate-800 flex items-center gap-3">
+                <input type="text" id="ted-chat-input" placeholder="Type your requirements, technical questions, or project specs..." class="flex-1 bg-black/70 border border-slate-700 rounded-lg px-4 py-3 text-sm text-white focus:border-cyan-400 outline-none shadow-inner transition-colors">
+                <button type="submit" class="btn-electric py-3 px-6 text-sm shrink-0">
+                    <span>Send to Ted</span>
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- Right Column: Interactive Quick Scoping & Diagnostic Utilities (4 cols) -->
+        <div class="lg:col-span-4 space-y-6">
+            
+            <!-- Card 1: Fast Scoping Form (Calls Ted Proposal Engine) -->
+            <div class="glass-panel p-5 border-cyan-500/30">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+                        <i data-lucide="file-text" class="w-4 h-4 text-cyan-400"></i>
+                        <span>Instant Quotation Generator</span>
+                    </h3>
+                    <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/40">AI SCOPED</span>
+                </div>
+                <p class="text-xs text-slate-400 mb-4">
+                    Provide project basics and Ted will calculate an itemized quotation submitted for executive sign-off.
+                </p>
+
+                <form id="quick-scope-form" class="space-y-3 text-xs">
+                    <div>
+                        <label class="block text-slate-300 mb-1">Your Name / Organization</label>
+                        <input type="text" id="scope-name" required placeholder="e.g. Apex Biotech Labs" class="w-full bg-black/60 border border-slate-700 rounded px-2.5 py-1.5 text-slate-100 focus:border-cyan-400 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 mb-1">Email Address</label>
+                        <input type="email" id="scope-email" required placeholder="contact@apexlabs.com" class="w-full bg-black/60 border border-slate-700 rounded px-2.5 py-1.5 text-slate-100 focus:border-cyan-400 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 mb-1">Primary Specialty</label>
+                        <select id="scope-vertical" class="w-full bg-black/60 border border-slate-700 rounded px-2.5 py-1.5 text-slate-100 focus:border-cyan-400 outline-none">
+                            <option value="ai_solutions">Artificial Intelligence Solutions</option>
+                            <option value="software_dev">Website & Software Development</option>
+                            <option value="hardware">Computer Hardware & Workstations</option>
+                            <option value="it_support">24/7 Managed IT Support</option>
+                            <option value="green_tech">Green E-Waste Recycling</option>
+                            <option value="education">Corporate Tech Upskilling</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 mb-1">Project Scope Summary</label>
+                        <textarea id="scope-desc" rows="2" placeholder="Describe key deliverables, timeline & budget expectations..." class="w-full bg-black/60 border border-slate-700 rounded px-2.5 py-1.5 text-slate-100 focus:border-cyan-400 outline-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full btn-electric py-2 text-xs font-bold">
+                        Generate Quotation with Ted
+                    </button>
+                </form>
+            </div>
+
+            <!-- Card 2: Ted's Live Operations Summary -->
+            <div class="glass-panel p-5 border-slate-800">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-1.5">
+                        <i data-lucide="activity" class="w-4 h-4 text-emerald-400"></i>
+                        <span>Ted Real-Time Status</span>
+                    </h3>
+                    <span class="text-[10px] text-emerald-400 font-mono">NOMINAL</span>
+                </div>
+                <div class="space-y-2 text-xs text-slate-300">
+                    <div class="flex justify-between py-1 border-b border-slate-800/80">
+                        <span class="text-slate-400">Neural Engine:</span>
+                        <span class="font-mono text-cyan-300">MaxReT3ch NLP Core v2.4</span>
+                    </div>
+                    <div class="flex justify-between py-1 border-b border-slate-800/80">
+                        <span class="text-slate-400">Response Latency:</span>
+                        <span class="font-mono text-emerald-400">12ms (Local Inference)</span>
+                    </div>
+                    <div class="flex justify-between py-1 border-b border-slate-800/80">
+                        <span class="text-slate-400">Human Approval Gate:</span>
+                        <span class="font-mono text-amber-300">Strict Enforcement</span>
+                    </div>
+                    <div class="flex justify-between py-1">
+                        <span class="text-slate-400">DoD Sanitization:</span>
+                        <span class="font-mono text-cyan-300">5220.22-M Ready</span>
+                    </div>
+                </div>
+                
+                <div class="mt-4 pt-3 border-t border-slate-800">
+                    <button onclick="Ted.sendMessage('Generate a real-time executive business performance report.')" class="w-full py-1.5 rounded bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700 flex items-center justify-center gap-1.5">
+                        <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 text-cyan-400"></i>
+                        <span>Run Business Performance Audit</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Quick Scoping Form handler
+    const scopeForm = document.getElementById('quick-scope-form');
+    if (scopeForm) {
+        scopeForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('scope-name').value;
+            const email = document.getElementById('scope-email').value;
+            const vertical = document.getElementById('scope-vertical').value;
+            const desc = document.getElementById('scope-desc').value;
+
+            Ted.sendMessage(`Please generate a project proposal for ${name} (${email}). Vertical: ${vertical}. Requirements: ${desc}`);
+            App.showToast("Quotation request submitted to Ted!", "info");
+        });
+    }
+</script>
+{% endblock %}
